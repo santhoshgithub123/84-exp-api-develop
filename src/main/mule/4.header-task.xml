@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c7558c0e-4cca-486d-8ca1-f7dd9d235ec9" >
+		<http:listener-connection host="0.0.0.0" port="8097" />
+	</http:listener-config>
+	<flow name="4.header-taskFlow" doc:id="4d3aff6a-b3d4-4282-bbd6-325806493200" >
+		<http:listener doc:name="Listener" doc:id="5ddfe220-4630-4e40-a1be-8b6cb6a861d1" config-ref="HTTP_Listener_config" path="/headers"/>
+		<logger level="INFO" doc:name="Logger" doc:id="65b5d3c7-c5e3-4704-8b81-7cca545c4042" message="#[attributes.headers]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="dbc78fed-b030-446d-aba6-80701ca686cc" message="#[attributes.headers.transactionId]"/>
+	</flow>
+</mule>
